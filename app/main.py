@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Path as PathParameter, status
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, ConfigDict, Field
 import uvicorn
 
@@ -54,6 +55,11 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+
+@app.get("/", include_in_schema=False)
+def redirect_to_docs() -> RedirectResponse:
+    return RedirectResponse(url="/docs")
 
 
 @app.post(

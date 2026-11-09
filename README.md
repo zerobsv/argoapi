@@ -44,7 +44,8 @@ docker push YOUR_REGISTRY/document-api:1.0.0
 docker run --rm -p 8000:8000 -v document-data:/data document-api:1.0.0
 ```
 
-Open [http://localhost:8000/docs](http://localhost:8000/docs) for Swagger UI.
+Open [http://localhost:8000](http://localhost:8000) or
+[http://localhost:8000/docs](http://localhost:8000/docs) for Swagger UI.
 
 ## Deploy with Helm
 
