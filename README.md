@@ -84,3 +84,18 @@ Then visit `http://localhost:8000/docs`.
 
 Argo CD syncs the chart from the repository's `helm` directory into the
 `document-api` namespace using the configured image.
+
+
+## Curl commands
+
+#### POST command:
+
+```
+curl -X POST http://localhost:8000/documents   -H 'Content-Type: application/json'   -d '{"id":1,"name":"xyz","phone_name":["apple"],"location":"string"}'
+```
+
+#### GET command:
+
+```
+curl -k http://localhost:8000/document/1
+```
