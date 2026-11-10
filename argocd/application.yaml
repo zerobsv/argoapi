@@ -14,7 +14,7 @@ spec:
     helm:
       values: |
         image:
-          repository: YOUR_REGISTRY/document-api
+          repository: document-api
           tag: "1.0.0"
   destination:
     server: https://kubernetes.default.svc

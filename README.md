@@ -39,9 +39,9 @@ its location with the `DATABASE_PATH` environment variable.
 
 ```sh
 docker build -t document-api:1.0.0 .
-docker tag document-api:1.0.0 YOUR_REGISTRY/document-api:1.0.0
+docker tag document-api:1.0.0 document-api:1.0.0
 docker push YOUR_REGISTRY/document-api:1.0.0
-docker run --rm -p 8000:8000 -v document-data:/data document-api:1.0.0
+docker run --rm -p 8000:8000 document-api:1.0.0
 ```
 
 Open [http://localhost:8000](http://localhost:8000) or
@@ -68,6 +68,23 @@ kubectl -n document-api port-forward svc/document-api 8000:8000
 ```
 
 Then visit `http://localhost:8000/docs`.
+
+## Install and Run Argo CD
+
+```
+kubectl create ns argocd
+
+kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl delete ns argocd
+```
+
 
 ## Deploy with Argo CD
 

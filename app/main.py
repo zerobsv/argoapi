@@ -10,7 +10,7 @@ from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, ConfigDict, Field
 import uvicorn
 
-DATABASE_PATH = Path(os.getenv("DATABASE_PATH", "documents.db"))
+DATABASE_PATH = Path("/app/data/documents.db")
 
 
 class Document(BaseModel):
@@ -23,13 +23,14 @@ class Document(BaseModel):
 
 
 def connect() -> sqlite3.Connection:
+    print(f"Database path: {DATABASE_PATH} Current dir: {os.getcwd()}")
     connection = sqlite3.connect(DATABASE_PATH)
     connection.row_factory = sqlite3.Row
     return connection
 
 
 def initialize_database() -> None:
-    DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    # DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
     with connect() as connection:
         connection.execute(
             """
