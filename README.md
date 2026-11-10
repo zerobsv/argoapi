@@ -69,6 +69,19 @@ kubectl -n document-api port-forward svc/document-api 8000:8000
 
 Then visit `http://localhost:8000/docs`.
 
+## Run on Minikube
+
+```
+minikube start -p devx --driver=docker --nodes=3 --memory=4096m
+
+minikube image load -p devx document-api:1.0.0
+
+Cleanup:
+
+minikube delete -p devx
+```
+
+
 ## Install and Run Argo CD
 
 ```
@@ -80,11 +93,20 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 
+Cleanup:
+
 kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 kubectl delete ns argocd
 ```
 
+## Install Argo CD CLI
+
+```
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm argocd-linux-amd64
+```
 
 ## Deploy with Argo CD
 
