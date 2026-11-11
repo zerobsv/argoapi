@@ -110,6 +110,11 @@ rm argocd-linux-amd64
 
 ## Deploy with Argo CD
 
+#### Get admin password
+```
+argocd admin initial-password -n argocd
+```
+
 1. Build and push the container image to a registry accessible by the cluster.
 2. Edit [`argocd/application.yaml`](./argocd/application.yaml): replace
    `repoURL` with the Git repository URL containing this chart and replace
@@ -138,3 +143,13 @@ curl -X POST http://localhost:8000/documents   -H 'Content-Type: application/jso
 ```
 curl -k http://localhost:8000/document/1
 ```
+
+#### Demo Curl Requests:
+
+```
+curl -X POST http://localhost:8000/documents   -H 'Content-Type: application/json'   -d '{"id":1,"name":"axyz","phone_name":["apple"],"location":"string"}'   
+curl -X POST http://localhost:8000/documents   -H 'Content-Type: application/json'   -d '{"id":2,"name":"bxyz","phone_name":["apple"],"location":"string"}'   
+curl -k http://localhost:8000/document/1
+curl -k http://localhost:8000/document/2
+```
+

@@ -10,7 +10,7 @@ from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, ConfigDict, Field
 import uvicorn
 
-DATABASE_PATH = Path("/app/data/documents.db")
+DATABASE_PATH = Path(os.getenv("DATABASE_PATH", "/app/data/documents.db"))
 
 
 class Document(BaseModel):
